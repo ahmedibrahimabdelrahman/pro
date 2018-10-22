@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+     body{
+       background-color: black;
+     }
+      input{
+        display:block;
+        padding: 16px;
+        margin: 5px
+
+      }
+      button{   display:block;
+            padding: 15px;
+              width: 176px;
+              margin: 5px}
+        .encrypt{
+          background-color:#5db4e6;
+
+        }
+        .decrypt{
+          background-color:#d04f4f;
+        }
+        p{
+          font-style: italic;
+          font-size: 30px;
+          color:#b72020;
+        }
+        marquee{
+          color:#fff;
+          font-style: italic;
+          font-size: 30px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <marquee>الاسم: احمد ابراهيم عبدالرحمن
+سكشن:1
+الفرقه:رابعه حاسبات
+    </marquee>
+    <div id='root'>
+        <input id='plaintext' type ='text' placeholder="enter plaintext">
+        <input id='key' type ='number' placeholder="enter key">
+        <button class="encrypt"onclick='encrypt()'>encrypt</button>
+        <button class="decrypt" onclick='decrypt()'>decrypt</button>
+
+    </div>
+
+    <script>
+
+
+          function encrypt(){
+            //kry
+            var key=document.getElementById('key');
+            var keyValue=parseInt(key.value)
+            var root = document.getElementById('root')
+            var p =document.createElement('p')                    // Create a <p> element
+            var t = document.createTextNode("the key is:" +keyValue);
+            p.appendChild(t);
+            root.appendChild(p);                                         // Append the text to <p>
+            document.body.appendChild(root);
+
+
+
+            var plaintext=document.getElementById('plaintext').value;
+            var text = "";
+            var val;
+            var temp;
+            for(let i =0; i<plaintext.length;i++){
+              val = plaintext.charCodeAt(i);
+              if(val+keyValue>122){
+              //  alert ("it's above z");
+                val=97+keyValue-1-(122-val);
+                text +=String.fromCharCode(val);
+
+
+              }else
+              text +=String.fromCharCode(val+keyValue);
+
+
+            }
+
+            var root = document.getElementById('root')
+            var p =document.createElement('p')                    // Create a <p> element
+            var t = document.createTextNode("the encryption is:"+ text);
+
+            p.appendChild(t);
+            root.appendChild(p);                                         // Append the text to <p>
+            document.body.appendChild(root);
+
+             }
+          function decrypt(){
+            var key=document.getElementById('key');
+            var keyValue=parseInt(key.value)
+            var root = document.getElementById('root')
+            var p =document.createElement('p')                    // Create a <p> element
+            var t = document.createTextNode("the key is:" +keyValue);
+            p.appendChild(t);
+            root.appendChild(p);                                         // Append the text to <p>
+            document.body.appendChild(root);
+            var plaintext=document.getElementById('plaintext').value;
+            var text = "";
+            var val;
+            for(let i =0; i<plaintext.length;i++){
+              val = plaintext.charCodeAt(i);
+              if(val-keyValue<97){
+              //  alert ("it's above z");
+                val=122-(keyValue-1)+(val-97);
+                text +=String.fromCharCode(val);
+
+
+              }else
+              text +=String.fromCharCode(val+keyValue);
+
+
+          }
+          var root = document.getElementById('root')
+          var p =document.createElement('p')                    // Create a <p> element
+          var t = document.createTextNode("the decryption is:"+ text);
+          p.appendChild(t);
+          root.appendChild(p);                                         // Append the text to <p>
+          document.body.appendChild(root);
+        }
+    </script>
+  </body>
+</html>
